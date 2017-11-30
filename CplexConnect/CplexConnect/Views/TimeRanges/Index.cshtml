@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CplexConnect.Models.TimeRange>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Time Ranges</h2>
+<h6>Named time ranges that include multiple time periods.</h6>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Time Range
+        </th>
+        <th>
+            Periods
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Range)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periods)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

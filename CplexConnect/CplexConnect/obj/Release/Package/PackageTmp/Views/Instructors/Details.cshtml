@@ -1,0 +1,112 @@
+﻿@using CplexConnect.Models;
+@model Tuple<Instructor, InputData>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Instructors</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.InstructorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.InstructorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PhoneNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PhoneNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.IsClinical)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.IsClinical)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.MaxCourseLoad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.MaxCourseLoad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PrimaryProgram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PrimaryProgram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.AssignCourseLoad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.AssignCourseLoad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.CourseDist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.CourseDist)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Item1.CourseDist2)
+        </dd>
+        <dt>
+            <!-- pulls in each course that the instructor is teaching-->
+        Courses
+        </dt>
+        <dd>
+            @{foreach(var Class in (List<InputData>)ViewBag.ClassList)
+                {
+                    @Class.CourseName
+                    <br/> 
+                }
+            }</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Item1.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

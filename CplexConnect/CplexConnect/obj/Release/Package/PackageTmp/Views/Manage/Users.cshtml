@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2 class="col-centered">Users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateNewUser", null, new { @class = "btn btn-default" })
+</p>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title accordion-labels header-crimson">
+            <a data-toggle="collapse" data-parent="#accordion" href="#demo1">Admin<span class="glyphicon glyphicon-menu-down accordion-arrows"></span></a>
+        </h4>
+    </div>
+    <div id="demo1" class="panel-collapse collapse">
+        <div class="panel-body">
+            <table class="table table-hover table-bordered table-condensed">
+                <tr>
+                    <th class="col-centered">
+                        UserName
+                    </th>
+                    <th class="col-centered">
+                        Actions
+                    </th>
+                </tr>
+
+                @foreach (var item in ViewBag.adminUsers)
+            {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td class="col-centered">
+                            @Html.ActionLink("Reset Password", "ResetUserPassword", new { id = item.Id }, new { onclick = "return confirm('Reset password to Alabama2017?');" }) |
+                                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id }, new { onclick = "return confirm('Are you sure you wish to delete this user?');" })<span> |</span>
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title accordion-labels header-crimson">
+            <a data-toggle="collapse" data-parent="#accordion" href="#demo2">Users<span class="glyphicon glyphicon-menu-down accordion-arrows"></span></a>
+        </h4>
+    </div>
+    <div id="demo2" class="panel-collapse collapse">
+        <div class="panel-body">
+            <table class="table table-hover table-bordered table-condensed">
+                <tr>
+                    <th class="col-centered">
+                        UserName
+                    </th>
+                    <th class="col-centered">
+                        Actions
+                    </th>
+                </tr>
+
+                @foreach (var item in ViewBag.NormalUsers)
+            {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td class="col-centered">
+                            @Html.ActionLink("Reset Password", "ResetUserPassword", new { id = item.Id }, new { onclick = "return confirm('Reset password to Alabama2017?');" }) |
+                            @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id }, new { onclick = "return confirm('Are you sure you wish to delete this user?');" })<span> |</span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

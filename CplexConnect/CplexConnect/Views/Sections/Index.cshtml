@@ -1,0 +1,175 @@
+﻿@model IEnumerable<CplexConnect.Models.Section>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sections</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th>
+          Section
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsOnline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomReq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SectionCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Program)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeRange)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Course)@Html.DisplayFor(model => item.SectionNumbers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsOnline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomReq)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionCapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Program)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.TimeRange)
+            @*@switch (item.TimeRange)
+    {
+        case "1":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "2":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM";
+            break;
+        case "3":
+            ViewBag.TimeRangeDisplay = "MWF Early, 50 min, 8 AM - 1 PM";
+            break;
+        case "4":
+            ViewBag.TimeRangeDisplay = "Late, 75 min, 5- 6:30";
+            break;
+        case "5":
+            ViewBag.TimeRangeDisplay = "Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "12":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad MW, 75 min, 2 PM - 3:30 PM";
+            break;
+        case "123":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM";
+            break;
+        case "1234":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "13":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM";
+            break;
+        case "134":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "1345":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "14":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "145":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "15":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "23":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM";
+            break;
+        case "234":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "2345":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "24":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "245":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "25":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "34":
+            ViewBag.TimeRangeDisplay = "MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "345":
+            ViewBag.TimeRangeDisplay = "MWF Early, 50 min, 8 AM - 1 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "35":
+            ViewBag.TimeRangeDisplay = "MWF Early, 50 min, 8 AM - 1 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "45":
+            ViewBag.TimeRangeDisplay = "Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "124":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM OR Late, 75 min, 5- 6:30";
+            break;
+        case "125":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "135":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "1235":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "1245":
+            ViewBag.TimeRangeDisplay = "Grad MW/TR, 75 min, 8 AM - 3:30 PM OR Under Grad MW, 75 min, 2 PM - 3:30 PM OR Late, 75 min, 5- 6:30 OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        case "235":
+            ViewBag.TimeRangeDisplay = "Under Grad MW, 75 min, 2 PM - 3:30 PM OR MWF Early, 50 min, 8 AM - 1 PM OR Under Grad TR, 75 min, 8 AM - 3:30 PM";
+            break;
+        default:
+            ViewBag.TimeRangeDisplay = "All";
+            break;
+
+    }
+    @ViewBag.TimeRangeDisplay
+            *@
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

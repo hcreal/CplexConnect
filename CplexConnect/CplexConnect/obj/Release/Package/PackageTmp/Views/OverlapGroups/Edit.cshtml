@@ -1,0 +1,212 @@
+﻿@model CplexConnect.Models.OverlapGroups
+
+@{
+    ViewBag.Title = "Edit";
+}
+@{
+    List<string> coursesSplit = Model.Sections.Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+
+    bool check1 = false;
+    bool check2 = false;
+    bool check3 = false;
+    bool check4 = false;
+    bool check5 = false;
+    bool check6 = false;
+    string c1 = "";
+    string c2 = "";
+    string c3 = "";
+    string c4 = "";
+    string c5 = "";
+    string c6 = "";
+}
+
+<h2>Edit</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Groups</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OverlapGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OverlapGroup, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OverlapGroup, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Sections, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check1 = true; c1 = i; break;
+                        }
+
+                    }
+                    break;
+                }
+                @if (check1 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course && i != c1)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check2 = true; c2 = i;
+                        }
+                    }
+
+                }
+                @if (check2 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course && i != c1 && i != c2)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check3 = true; c3 = i;
+                        }
+                    }
+
+                }
+                @if (check3 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course && i != c1 && i != c2 && i != c3)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check4 = true; c4 = i;
+                        }
+                    }
+
+                }
+                @if (check4 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course && i != c1 && i != c2 && i != c3 && i != c4)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check5 = true; c5 = i;
+                        }
+                    }
+
+                }
+                @if (check5 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var i in coursesSplit)
+                {
+                    foreach (var k in Model.SectionList)
+                    {
+                        if (i == k.Course && i != c1 && i != c2 && i != c3 && i != c4 && i != c5)
+                        {
+                            @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", k.ID), k.Course)
+                            @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                            check6 = true; c6 = i;
+                        }
+                    }
+
+                }
+                @if (check6 != true)
+                {
+                    @Html.DropDownListFor(model => model.SectionList, new SelectList(Model.SectionList, "ID", "Course", 1))
+                    @Html.ValidationMessageFor(model => model.Sections, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

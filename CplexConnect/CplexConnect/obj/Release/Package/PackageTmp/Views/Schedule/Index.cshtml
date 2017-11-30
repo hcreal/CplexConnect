@@ -1,0 +1,192 @@
+﻿@using System.Linq
+@using CplexConnect.Models;
+@model Tuple<ScheduleViewModel, InputData>
+<!--allows user to sort by program-->
+<select  id="sortBy" class="form-control pull-right">
+    <option value="" disabled selected>@ViewBag.SortBy</option>
+    <option value="OM">OM</option>
+    <option value="MIS">MIS</option>
+    <option value="ST">STATS</option>
+</select>
+<label class="pull-right">Sort By: </label>
+
+
+@Html.DropDownList("SortTheSems", null, new { @id = "semBy", @class = "SortSem" })
+
+@*<select id="semBy" class="form-control pull-left">
+    <option value="" disabled selected>@ViewBag.SortBySemester</option>
+    <option value="0">Current</option>
+    <option value="1">Fall</option>
+</select>*@
+<label class="pull-left" style="margin-left:9em">Sort By: </label>
+<!--initializes values for calculating course load and assigned instructors-->
+<h2>Input Data</h2>
+@{int m = 1;
+    int t = 1;
+    int d = 0;
+    int w = 0;
+    var instNum = "0";
+    int instrNum = 0;
+    List<int> courseNum = new List<int>();
+    List<int> InstrNum = new List<int>();
+    var temp = ViewBag.SortBySemester;
+    foreach (var items in temp)
+    {
+         instNum = items.ToString();
+
+    }
+            instrNum = int.Parse(instNum);
+}
+
+
+@using (Html.BeginForm("Index", "Schedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table id="inputData" class="stripe row-border order-column" cellspacing="0">
+        <thead>
+            <tr>
+                <th style="background-color: #808080; color: white;">
+                    Instructor
+                </th>
+                <th style="background-color: #808080;color: white;">
+                    Max Course Load
+                </th>
+                <th style="background-color: #808080;color: white;">
+                    Assigned Course Load
+                </th>
+                @*Razor to foreach through each course and add it*@
+                @foreach (var l in Model.Item1.SectionList)
+                {
+                    foreach (var f in Model.Item1.ModelToList)
+                    {
+                        //assigns instructor to course
+                        if (l.ID == f.Course_Id)
+                        {
+                            courseNum.Add(m);
+                            InstrNum.Add(f.Instructor_Id);
+                        }
+
+                    }
+                    m++;
+                    <th class="line">
+                        @l.Course
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @*Foreach through the instructors*@ 
+            @foreach (var i in Model.Item1.InstructorList)
+            {
+                <tr>
+                    <td style="background-color:#808080; color:white;">
+                        @i.LastName, @i.FirstName
+                    </td>
+                    <td style="background-color:#808080; color:white;">
+                        @i.MaxCourseLoad
+                    </td>
+                    <td style="background-color:#808080; color:white;" id="assign">
+                        @i.AssignCourseLoad
+                    </td>
+                    @for (int j = 1; j < m; j++)
+                    {
+                        var check = false;
+                        foreach (var e in Model.Item1.ModelToList)
+                        {
+                            //checking if the radio button should be checked
+                            if (e.Course_Id == j && i.ID == e.Instructor_Id && e.Semester_Id == instrNum)
+                            {
+                                <td><input type="radio" checked="checked" id="radioCol@(j)" name="radioCol@(j)" value="@(i.ID)" onclick="SumValue(this.value)"></td>
+                                check = true;
+                                }
+                            }
+                            if (check != true)
+                            {
+                            <td><input type="radio" id="radioCol@(j)" name="radioCol@(j)" value="@(i.ID)" onclick="SumValue(this.value)"></td>
+                        }
+                    }
+                </tr>
+                d++;
+
+                t++;
+            }
+        </tbody>
+    </table>
+            <div class="form-group">
+                <input type="submit" value="Submit" />
+            </div>
+}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.1/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript">
+
+    //Jquery for dropdown
+    $(document).ready(function () {
+        $('#sortBy').change(function () {
+
+            if ($(this).val() != "") {
+
+                window.location.href = "http://" + window.location.host + window.location.pathname + "?sortBy=" + $(this).val();
+            }
+        });
+    });
+
+    //Jquery for dropdown
+    $(document).ready(function () {
+        $('#semBy').change(function () {
+
+            if ($(this).val() != "") {
+
+                window.location.href = "http://" + window.location.host + window.location.pathname + "?SortBySemester=" + $(this).val();
+            }
+        });
+    });
+
+    //jQuery for the Datatables
+    $(document).ready(function () {
+        $('#inputData').DataTable({
+            "scrollY": "50vh",
+            "scrollX": true,
+            scrollCollapse: true,
+            paging: false,
+            fixedColumns: {
+                leftColumns: 3
+            },
+            language: {
+                searchPlaceholder: "Search Instructor"
+            }
+
+        });
+        $(window).resize(setWidthOfContainer);
+        function setWidthOfContainer() {
+            $('div.container').css('width', '90%');
+
+        }
+        setWidthOfContainer();
+
+    });
+
+
+
+
+
+
+    //function SumValue(btn) {
+    //    var temp = document.getElementById("assign").innerHTML.trimmed();
+    //    var Assigned = parseInt(temp);
+    //    var btnVal = parseInt(btn);
+    //    var total = (Assigned + btnVal);
+    //    document.getElementById("assign").innerHTML = total;
+        //alert(total);
+    //}
+
+
+    String.prototype.trimmed = function () {
+        return this.replace(
+            /^(\s|&nbsp;|<br\s*\/?>)+?|(\s|&nbsp;|<br\s*\/?>)+?$/ig, ' '
+        ).trim();
+    }
+</script>

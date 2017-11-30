@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ISM Department Schedule Application</h1>
+    <p class="lead"></p>
+    @{if (User.IsInRole("IT") || User.IsInRole("admin"))
+            {
+            <p><a href="http://scheduler.cba.ua.edu/cplex/Schedule/Export" class="btn btn-lg buttonred">Scheduler &raquo;</a></p>
+        }
+    }
+</div>
+
+@*@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <table>
+            <tr>
+                <td>File:</td>
+                <td>
+                    <input type="file" name="UploadedFile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }*@
+<div class="row">
+    <div class="col-md-4">
+        <h2>ROOMS</h2>
+        <p>
+            Edit, add, or delete Rooms here.
+        </p>
+        <p><a class="btn btn-default" href="/Rooms/Index">Rooms &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>INSTRUCTORS</h2>
+        <p>Edit, add, or delete Instructors here.</p>
+        <p><a class="btn btn-default" href="/Instructors/Export">Instructors &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>SECTIONS</h2>
+        <p>Edit, add, or delete Sections here.</p>
+        <p><a class="btn btn-default" href="/sections/index">Sections &raquo;</a></p>
+    </div>
+</div>

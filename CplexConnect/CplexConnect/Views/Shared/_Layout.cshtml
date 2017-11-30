@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<img id="img_logo"  alt="Logo" style="align-items:center; margin-top: 50px; margin-bottom: -50px; margin-left: 50px" height="50" src="@Url.Content("https://strategiccommunications.ua.edu/img/logos/COLLEGES/BUS/CapstoneA.CulverhouseCollege.OL.png")" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Cplex Connect", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Rooms", "Index", "Rooms")</li>
+                    <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
+                    <li>@Html.ActionLink("Sections", "Index", "Sections")</li>
+                    <li>@Html.ActionLink("Buildings", "Index", "Buildings")</li>
+                    <li>@Html.ActionLink("Input Data", "Index", "Schedule")</li>
+                    <li>@Html.ActionLink("Time Ranges", "Index", "TimeRanges")</li>
+                    <li>@Html.ActionLink("Periods", "Index", "Periods")</li>
+                    <li>@Html.ActionLink("Groups", "Index", "Groups")</li>
+                    <li>@Html.ActionLink("Overlap Groups", "Index", "OverlapGroups")</li>
+                    @*<li>@Html.ActionLink("Periods", "Index", "Periods")</li>*@
+                    @*<li>@Html.ActionLink("Account", "Login", "Account")</li>*@
+                    <li>@Html.Partial("_LoginPartial")</li>
+                    @*<li>@Html.ActionLink("Schedule Output", "Index", "Schedule")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy;CplexConnect</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+
+
+
+    </script>
+</body>
+</html>
